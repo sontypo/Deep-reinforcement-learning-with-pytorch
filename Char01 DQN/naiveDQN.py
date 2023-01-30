@@ -55,7 +55,7 @@ class DQN():
 
     def choose_action(self, state):
         state = torch.unsqueeze(torch.FloatTensor(state), 0) # get a 1D array
-        if np.random.randn() <= EPISILO:# greedy policy
+        if np.random.randn() > EPISILO:# greedy policy
             action_value = self.eval_net.forward(state)
             action = torch.max(action_value, 1)[1].data.numpy()
             action = action[0] if ENV_A_SHAPE == 0 else action.reshape(ENV_A_SHAPE)
